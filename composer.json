@@ -1,0 +1,19 @@
+{
+  "name": "eliottjaquieredu/exablanc",
+  "type": "library",
+  "version": "0.0.1",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.2"
+  },
+  "authors": [
+    {
+      "name": "eliott-jaquier",
+      "email": "eliott.jaquier@eduvaud.ch"
+    }
+  ]
+}
