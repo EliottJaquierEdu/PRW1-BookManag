@@ -2,6 +2,8 @@
 @require_once "../vendor/autoload.php";
 
 use App\Borrower;
+use App\intangibleAsset;
+use App\PhysicalAsset;
 
 /**
  * NEED :
@@ -12,22 +14,28 @@ use App\Borrower;
  * asset/good/thing (physical or )
  */
 
+$now = new DateTimeImmutable();
+$nowCallback = function(){
+    global $now;
+    return $now;
+};
+
 $user1 = new Borrower("Eliott","eliott.jaquier@gmail.com");
 $user2 = new Borrower("Mikael","cosalpino@gmail.com");
 
-$physicalAsset1 = new PhysicalAsset();
-$physicalAsset2 = new PhysicalAsset();
-$physicalAsset3 = new PhysicalAsset();
-$physicalAsset4 = new PhysicalAsset();
-$physicalAsset5 = new PhysicalAsset();
+$physicalAsset1 = new PhysicalAsset($nowCallback);
+$physicalAsset2 = new PhysicalAsset($nowCallback);
+$physicalAsset3 = new PhysicalAsset($nowCallback);
+$physicalAsset4 = new PhysicalAsset($nowCallback);
+$physicalAsset5 = new PhysicalAsset($nowCallback);
 
 //assert $physicalAsset1->borrowDuration
 
-$IntangibleAsset = new IntangibleAsset();
-$IntangibleAsset1 = new IntangibleAsset();
-$IntangibleAsset2 = new IntangibleAsset();
+$intangibleAsset = new IntangibleAsset($nowCallback);
+$intangibleAsset1 = new IntangibleAsset($nowCallback);
+$intangibleAsset2 = new IntangibleAsset($nowCallback);
 
-//assert $IntangibleAsset2->borrowDuration
+//assert $intangibleAsset2->borrowDuration
 
 $user1->borrow($physicalAsset1);
 
@@ -41,7 +49,7 @@ $user1->borrow($physicalAsset3);
 $user1->borrow($physicalAsset4);
 
 //Ce lien est directement envoyé par mail à la personne. new Link();
-$user1->borrow($IntangibleAsset);
+$user1->borrow($intangibleAsset);
 
 //This throw error (MAX LIMIT REACHED)
 $user1->borrow($physicalAsset5);
@@ -56,7 +64,7 @@ $user1->borrow($physicalAsset5);
 $time->addDays(14);
 
 //Asert YES (IDEA : Liste d'umprunts ?)
-$IntangibleAsset->isExpired();
+$intangibleAsset->isExpired();
 //Assert NO
 $physicalAsset1->isExpired();
 

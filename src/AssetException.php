@@ -4,7 +4,7 @@ namespace App;
 
 use Exception;
 
-class AssetToBorrowException extends Exception
+class AssetException extends Exception
 {
     public function __construct($message = "")
     {
