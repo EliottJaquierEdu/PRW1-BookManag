@@ -1,0 +1,46 @@
+@startuml Class Diagramm
+
+class Borrower {
+    - name: string
+    - email: string
+    - borrowedItems: Asset[]
+    - receivedLinks: IntangibleAssetLink[]
+    + getNotExpiredBorrowedItems(): Asset[]
+    + borrow(asset: Asset): void
+    + sendBack(asset: PhysicalAsset): void
+    + receiveLinkByMail(link: IntangibleAssetLink): void
+}
+note bottom of Borrower
+    A simple abstraction to simulate the fact that the user receive a link by mail.
+end note
+
+abstract class Asset {
+    # expirationDate: Date
+    # currentBorrower: Borrower?
+    {abstract} # getBorrowingDaysDuration(): int
+    + isExpired(): bool
+    + onBorrowBy(borrower: Borrower): void
+    + getCurrentBorrower(): Borrower?
+}
+
+note top of Asset
+    Currently, the limitation is that every asset can only be borrowed 
+    by one borrower at a time. Even if the asset is not physical.
+end note
+
+Asset <|-- PhysicalAsset
+class PhysicalAsset {
+    + onSendBackBy(borrower: Borrower): void
+}
+
+Asset <|-- IntangibleAsset
+class IntangibleAssetLink
+
+class IntangibleAssetLink {
+    - asset: IntangibleAsset
+    - borrower: Borrower
+    - isLinkValid(): bool
+    + sendEmail(): void
+    + consult(): void
+}
+@enduml
