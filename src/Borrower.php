@@ -13,6 +13,10 @@ class Borrower
         $this->receivedLinks = [];
     }
 
+    public function getReceivedLinks(){
+        return $this->receivedLinks;
+    }
+
     public function getNotExpiredBorrowedItems(){
         return array_filter($this->currentBorrowingList, function($item){
             return !$item->isExpired($this);
