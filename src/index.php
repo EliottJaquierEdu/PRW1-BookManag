@@ -1,4 +1,5 @@
 <?php
+
 @require_once "../vendor/autoload.php";
 
 use App\Borrower;
@@ -15,13 +16,13 @@ use App\PhysicalAsset;
  */
 
 $now = new DateTimeImmutable();
-$nowCallback = function(){
+$nowCallback = function () {
     global $now;
     return $now;
 };
 
-$user1 = new Borrower("Eliott","eliott.jaquier@gmail.com");
-$user2 = new Borrower("Mikael","cosalpino@gmail.com");
+$user1 = new Borrower("Eliott", "eliott.jaquier@gmail.com");
+$user2 = new Borrower("Mikael", "cosalpino@gmail.com");
 
 $physicalAsset1 = new PhysicalAsset($nowCallback);
 $physicalAsset2 = new PhysicalAsset($nowCallback);
