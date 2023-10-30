@@ -31,7 +31,7 @@ abstract class Asset
      * Set borrowing information
      * @throws AssetException
      */
-    public function onBorrowBy(Borrower $borrower): void
+    public function tryToBorrowBy(Borrower $borrower): void
     {
         if ($borrower == null) {
             throw new AssetException("The borrower cannot be null.");

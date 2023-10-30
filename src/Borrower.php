@@ -27,7 +27,7 @@ class Borrower
         if (count($notExpired) >= 5) {
             throw new BorrowerException("You cannot borrow this item because you already have 5 other items.");
         }
-        $asset->onBorrowBy($this);
+        $asset->tryToBorrowBy($this);
         array_push($this->currentBorrowingList, $asset);
     }
 
